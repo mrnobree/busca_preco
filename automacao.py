@@ -1,6 +1,9 @@
 import pyautogui
 import time
 import os
+import tkinter as tk
+from tkinter import messagebox
+
 
 def abrir_erp_login():
     # ABERTURA DO SISTEMA
@@ -83,7 +86,14 @@ def fechar_sistema():
     # CONFIRMANDO
     pyautogui.click(836, 554)
 
+def mostrar_pop_up():
+    root = tk.Tk()
+    root.withdraw()  # Ocultar a janela principal do Tkinter
+    messagebox.showinfo("Aviso", "O programa irá exexutar clique em OK para continuar. Por favor, não mexa no computador.")
+    root.destroy()
+
 def main():
+    mostrar_pop_up()
     abrir_erp_login()
     extrair_relatorio()
     executar_etl()

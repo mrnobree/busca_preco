@@ -68,10 +68,11 @@ def extrair_relatorio():
     # SALVAR
     print("Salvando")
     pyautogui.click(1326, 608)
-    time.sleep(1)
+    time.sleep(2)
 
     # CONFIRMAR SAVE
     pyautogui.click(931, 548)
+    time.sleep(1)
 
 def executar_etl():
     # EXECUTAR EXTRATOR DE PYTHON
@@ -86,14 +87,19 @@ def fechar_sistema():
     # CONFIRMANDO
     pyautogui.click(836, 554)
 
-def mostrar_pop_up():
+def mostrar_pop_up_temporario():
     root = tk.Tk()
-    root.withdraw()  # Ocultar a janela principal do Tkinter
-    messagebox.showinfo("Aviso", "O programa irá exexutar clique em OK para continuar. Por favor, não mexa no computador.")
-    root.destroy()
+    root.title("Aviso")
+    root.geometry("400x200+942+512")
+    label = tk.Label(root, text="O programa está em execução.\nPor favor, não mexa no computador.", font=("Arial", 12))
+    label.pack(expand=True, padx=20, pady=20)
+    
+    # Fechar a janela após 5 segundos
+    root.after(5000, root.destroy)
+    root.mainloop()
 
 def main():
-    mostrar_pop_up()
+    mostrar_pop_up_temporario()
     abrir_erp_login()
     extrair_relatorio()
     executar_etl()
